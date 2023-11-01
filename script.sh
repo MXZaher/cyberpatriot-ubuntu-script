@@ -1,5 +1,5 @@
 PS3='Choose an option:'
-options=("Update Pre-Installed Applications" "Install Essential Programs (PAM, BUM, GUFW, CLAMAV/TK, AUDITD)" "List All Users" "List All Installed Packages" "List All Services" "Install and Set Auditd" "Set Password Complexity PAM Files" "Set Account Lockout Settings PAM Files" "Change Password Warning and Age Restrictions" "No Fun Policy" "Exit Terminal" "Set Services" "Check for rootkits and backdoors" "Root Login for SSHD" "Search for Hacking Tool Packages")
+options=("Update Pre-Installed Applications" "Install Essential Programs (PAM, BUM, GUFW, CLAMAV/TK, AUDITD)" "List All Users" "List All Installed Packages" "List All Services" "Install and Set Auditd" "Set Password Complexity PAM Files" "Set Account Lockout Settings PAM Files" "Change Password Warning and Age Restrictions" "No Fun Policy" "Exit Terminal" "Set Services" "Check for rootkits and backdoors" "Root Login for SSHD" "Search for Hacking Tool Packages" "Check for wack users" "Prevent IP Spoofy Goofy")
 select opt in "${options[@]}"
 do
 case $opt in
@@ -19,7 +19,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -35,6 +35,7 @@ sudo apt-get install gufw -y
 sudo apt-get install clamav -y
 sudo apt-get install clamtk -y
 sudo apt-get install gnome-system-tools -y
+sudo apt-get install bum -y
 clear
 echo " _  _ ___  _  _ _  _ ___ _  _    ____ ____ ____ _ ___  ___ "
 echo " |  | |__] |  | |\ |  |  |  |    [__  |    |__/ | |__]  |   "
@@ -49,7 +50,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -73,7 +74,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -97,7 +98,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -121,7 +122,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -146,7 +147,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -156,9 +157,11 @@ echo " 13) Check for rootkits and backdoors "
 echo " 14) Root Login for SSHD "
 ;;
 "Set Password Complexity PAM Files")
-gedit /etc/pam.d/common-password
 clear
-echo " _  _ ___  _  _ _  _ ___ _  _    ____ ____ ____ _ ___  ___ "
+echo 'auth required pam_tally2.so deny=5 onerr=fail unlock_time=1800' >> /etc/pam.d/common-auth
+apt-get install libpam-cracklib
+sed -i 's/\(pam_unix\.so.*\)$/\1 remember=5 minlen=8/' /etc/pam.d/common-password
+sed -i 's/\(pam_cracklib\.so.*\)$/\1 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1/' /etc/pam.d/common-passwordecho " _  _ ___  _  _ _  _ ___ _  _    ____ ____ ____ _ ___  ___ "
 echo " |  | |__] |  | |\ |  |  |  |    [__  |    |__/ | |__]  |   "
 echo " |__| |__] |__| | \|  |  |__|    ___] |___ |  \ | |     |   "
 echo " ___  _   _    _  _ ____ _  _    ___  ____ _  _ ____ ____   "
@@ -171,7 +174,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -196,7 +199,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -206,7 +209,7 @@ echo " 13) Check for rootkits and backdoors "
 echo " 14) Root Login for SSHD "
 ;;
 "Change Password Warning and Age Restrictions")
-gedit /etc/login.defs
+sed -i 's/PASS_MAX_DAYS.*$/PASS_MAX_DAYS 90/;s/PASS_MIN_DAYS.*$/PASS_MIN_DAYS 10/;s/PASS_WARN_AGE.*$/PASS_WARN_AGE 7/' /etc/login.defs
 clear
 echo " _  _ ___  _  _ _  _ ___ _  _    ____ ____ ____ _ ___  ___ "
 echo " |  | |__] |  | |\ |  |  |  |    [__  |    |__/ | |__]  |   "
@@ -221,7 +224,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -232,20 +235,7 @@ echo " 14) Root Login for SSHD "
 ;;
 "No Fun Policy")
 clear
-find . -type f -name "*.txt"
-find . -type f -name "*.png"
-find . -type f -name "*.jpg"
-find . -type f -name "*.jpeg"
-find . -type f -name "*.mp4"
-find . -type f -name "*.mp3"
-find . -type f -name "*.m4a"
-find . -type f -name "*.hvec"
-find . -type f -name "*.mov"
-find . -type f -name "*.wav"
-find . -type f -name "*.gif"
-find . -type f -name "*.exe"
-find . -type f -name "*.zip"
-find . -type f -name "*.rar"
+find /home/ -type f \( -name "*.txt" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.mp4" -o -name "*.mp3" -o -name "*.m4a" -o -name "*.hvec" -o -name "*.wav" -o -name "*.gif" -o -name "*.exe" -o -name "*.zip" -o -name "*.rar" \)
 echo " _  _ ___  _  _ _  _ ___ _  _    ____ ____ ____ _ ___  ___ "
 echo " |  | |__] |  | |\ |  |  |  |    [__  |    |__/ | |__]  |   "
 echo " |__| |__] |__| | \|  |  |__|    ___] |___ |  \ | |     |   "
@@ -259,7 +249,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -273,9 +263,9 @@ break
 exit
 ;;
 "Set Services")
-
 ;;
 "Check for rootkits and backdoors")
+clear
 sudo apt-get install chkrootkit rkhunter -y
 sudo chkrootkit -y
 sudo rkhunter --update -y
@@ -293,7 +283,7 @@ echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -302,14 +292,21 @@ echo " 12) Set Services "
 echo " 13) Check for rootkits and backdoors "
 echo " 14) Root Login for SSHD "
 ;;
-"Root Login for SSHD")
+"SSHD Settings")
+clear
+if grep -qF 'PermitRootLogin' /etc/ssh/sshd_config; then sed -i 's/^.*PermitRootLogin.*$/PermitRootLogin no/' /etc/ssh/sshd_config; else echo 'PermitRootLogin no' >> /etc/ssh/sshd_config; fi
+# PermitRootLogin no
+# ChallengeResponseAuthentication no
+# PasswordAuthentication no
+# UsePAM no
+PermitEmptyPasswords no
 echo " 1) Update Pre-Installed Applications "
 echo " 2) Install Essential Programs (PAM, BUM, GUFW, CLAMAV) "
 echo " 3) List All Users "
 echo " 4) List All Installed Packages " 
 echo " 5) List All Services "
 echo " 6) Install and Set Auditd "
-echo  " 7) Set Password Complexity PAM Files "
+echo " 7) Set Password Complexity PAM Files "
 echo " 8) Set Account Lockout Settings PAM Files " 
 echo " 9) Change Password Warning and Age Restrictions "
 echo " 10) No Fun Policy "
@@ -318,18 +315,35 @@ echo " 12) Set Services "
 echo " 13) Check for rootkits and backdoors "
 echo " 14) Root Login for SSHD "
 echo " 15) Search for Hacking Tool Packages" 
-if grep -qF 'PermitRootLogin' /etc/ssh/sshd_config; 
-then 
-{
-  sed -i 's/^.*PermitRootLogin.*$/PermitRootLogin no/' /etc/ssh/sshd_config
-} 
-else 
-{
-  echo 'PermitRootLogin no' >> /etc/ssh/sshd_config
-} fi
 ;;
 "Search for Hacking Tool Packages")
+clear
 find /home/ -type f \( -name "*.tar.gz" -o -name "*.tgz" -o -name "*.zip" -o -name "*.deb" \)
+echo " 1) Update Pre-Installed Applications "
+echo " 2) Install Essential Programs (PAM, BUM, GUFW, CLAMAV) "
+echo " 3) List All Users "
+echo " 4) List All Installed Packages " 
+echo " 5) List All Services "
+echo " 6) Install and Set Auditd "
+echo " 7) Set Password Complexity PAM Files "
+echo " 8) Set Account Lockout Settings PAM Files " 
+echo " 9) Change Password Warning and Age Restrictions "
+echo " 10) No Fun Policy "
+echo " 11) Exit Terminal "
+echo " 12) Set Services " 
+echo " 13) Check for rootkits and backdoors "
+echo " 14) Root Login for SSHD "
+echo " 15) Search for Hacking Tool Packages" 
+;;
+"Check for wack users")
+clear 
+mawk -F: '$1 == "sudo"' /etc/group
+mawk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd
+mawk -F: '$2 == ""' /etc/passwd
+mawk -F: '$3 == 0 && $1 != "root"' /etc/passwd
+;;
+"Remove Blacklisted Programs")
+nmap zenmap apache2 nginx lighttpd wireshark tcpdump netcat-traditional nikto ophcrack
 ;;
 esac
 done
